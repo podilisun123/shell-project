@@ -8,7 +8,7 @@ G="\e[32m]"
 Y="\e[33m]"
 N="\e[0m]"
 
-read -p  "Enter DB PASSWORD: " MYSQL-PASSWD
+read -p  "Enter DB PASSWORD:  MYSQL-PASSWD "
 
 VALIDATE(){
     if [ $1 -ne 0 ]
@@ -24,3 +24,9 @@ then
 else
     echo "You are SUPER USER...."
 fi
+dnf install mysql-server -y &>>LOGFILE
+VALIDATE $? "install mysql server"
+systemctl  enable mysqld  &>>LOGFILE
+VALIDATE $? "enabling mysql server"
+systemctlb start mysqld &>>LOGFILE
+VALIDATE $? "start mysql servere"
